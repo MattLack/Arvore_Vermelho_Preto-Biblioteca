@@ -223,29 +223,33 @@ public class ArvoreBook {
 		if(z.getNoEsquerdo() == T.None){
 			x = z.getNoDireito();
 			this.Transplant(T, z, z.getNoDireito());
-		}else if(){
-			x = y.getNoDireito();
-		}
-		x.setNoPai(y.getNoPai());
-		if(isNone(y.getNoPai())){
-			raiz = x;
-		}else if(y == y.getNoPai().getNoEsquerdo()){
-			y.getNoPai().setNoEsquerdo(x);
+		}else if(z.getNoDireito() == T.None){
+			x = z.getNoEsquerdo();
+			this.Transplant(T, z, z.getNoEsquerdo());
 		}else{
-			y.getNoPai().setNoDireito(x);
+			y = this.TreeMinimum(z.getNoDireito());
+			corY = y.getCor();
+			x = y.getNoDireito();
+			if(y.getNoPai().equals(z)){
+				x.setNoPai(y);
+			}else{
+				this.Transplant(T, y, y.getNoDireito());
+				y.setNoDireito(z.getNoEsquerdo());
+				y.getNoEsquerdo().setNoPai(y);
+				y.setCor(z.getCor());
+			}
 		}
-		if(y != z){
-			z.setLivro(y.getLivro());
+		if(corY.equals(preto)){
+			this.RBDeleteFixup(T, x);
 		}
-		if(y.getCor() == preto){
-			RBDeleteFixup(x);
-		}
-		
 	}
 	
+	//-------------------------------------------------------------------//
+
 	
 	
-	
+	//-------------- MÉTODO DE BALANCEAMENTO DE EXCLUSÃO ----------------//
+	//CONCERTAR
 	
 	public static void RBDeleteFixup(NodeBook x){
 		
@@ -300,7 +304,7 @@ public class ArvoreBook {
 		x.setCor(preto);
 	}
 	
-	
+	//-------------------------------------------------------------------//
 	
 	
 	
