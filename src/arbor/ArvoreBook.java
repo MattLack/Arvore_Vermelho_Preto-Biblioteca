@@ -198,21 +198,6 @@ public class ArvoreBook {
 	
 	
 	
-	public static NodeBook TreeSucessor(NodeBook node){
-		
-		if(!isNone(node)){
-			return TreeSucessor(node.getNoDireito());
-		}
-		NodeBook nodeAux = node.getNoPai();
-		while(!isNone(nodeAux) && node == nodeAux.getNoDireito()){
-			node = nodeAux;
-			nodeAux = nodeAux.getNoPai();
-		}
-		return nodeAux;
-	}
-	
-	
-	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
 	
 	public void RBDelete(ArvoreBook T, NodeBook z){
@@ -249,56 +234,55 @@ public class ArvoreBook {
 	
 	
 	//-------------- MÉTODO DE BALANCEAMENTO DE EXCLUSÃO ----------------//
-	//CONCERTAR
-	
-	public static void RBDeleteFixup(NodeBook x){
 		
-		NodeBook w = None;
-		while(x != raiz && x.getCor() == preto){
-			if(x == x.getNoPai().getNoEsquerdo()){
-				w = x.getNoPai().getNoDireito();
-				if(w.getCor() == vermelho){
+	public void RBDeleteFixup(ArvoreBook T, NodeBook x){
+		
+		NodeBook w = T.None;
+		while( !(x.equals(T.raiz)) && x.getCor().equals(preto)){
+			if(x.equals(x.getNoPai().getNoEsquerdo())){
+				w = x.getNoPai().getNoDireito(); 
+				if(w.getCor().equals(vermelho)){
 					w.setCor(preto);
 					x.getNoPai().setCor(vermelho);
-					leftRotate(x.getNoPai());
+					this.leftRotate(T,x.getNoPai());
 					w = x.getNoPai().getNoDireito();
 				}
-				if(w.getNoEsquerdo().getCor() == preto && w.getNoDireito().getCor() == preto){
+				if( (w.getNoEsquerdo().getCor().equals(preto)) && (w.getNoDireito().getCor().equals(preto))){
 					w.setCor(vermelho);
 					x = x.getNoPai();
-				}else if(w.getNoDireito().getCor() == preto){
-					w.getNoEsquerdo().setCor(preto);
-					w.setCor(vermelho);
-					rightRotate(w);//
-					w = x.getNoPai().getNoDireito();
+				}else if(w.getNoDireito().getCor().equals(preto)){
+						w.getNoEsquerdo().setCor(preto);
+						w.setCor(vermelho);
+						this.rightRotate(T,w);
+						w = x.getNoPai().getNoDireito();
+					}
 					w.setCor(x.getNoPai().getCor());
 					x.getNoPai().setCor(preto);
 					w.getNoDireito().setCor(preto);
-					leftRotate(x.getNoPai());
-					x = raiz;
-				}
+					this.leftRotate(T,x.getNoPai());
+					x = T.raiz;
 			}else{
 				w = x.getNoPai().getNoEsquerdo();
-				if(w.getCor() == vermelho){
+				if(w.getCor().equals(vermelho)){
 					w.setCor(preto);
 					x.getNoPai().setCor(vermelho);
-					rightRotate(x.getNoPai());
+					this.leftRotate(T,x.getNoPai());
 					w = x.getNoPai().getNoEsquerdo();
 				}
-				if(w.getNoDireito().getCor() == preto && w.getNoEsquerdo().getCor() == preto){
+				if( (w.getNoDireito().getCor().equals(preto)) && (w.getNoEsquerdo().getCor().equals(preto))){
 					w.setCor(vermelho);
 					x = x.getNoPai();
-				}else if(w.getNoEsquerdo().getCor() == preto){
-					w.getNoDireito().setCor(preto);
-					w.setCor(vermelho);
-					leftRotate(w);
-					w = x.getNoPai().getNoEsquerdo();
+				}else if(w.getNoEsquerdo().getCor().equals(preto)){
+						w.getNoDireito().setCor(preto);
+						w.setCor(vermelho);
+						this.rightRotate(T,w);
+						w = x.getNoPai().getNoEsquerdo();
+					}
 					w.setCor(x.getNoPai().getCor());
 					x.getNoPai().setCor(preto);
 					w.getNoEsquerdo().setCor(preto);
-					rightRotate(x.getNoPai());
-					x = raiz;
-				}
+					this.leftRotate(T,x.getNoPai());
+					x = T.raiz;
 			}
 		}
 		x.setCor(preto);
