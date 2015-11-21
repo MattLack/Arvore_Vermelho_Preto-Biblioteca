@@ -1,6 +1,6 @@
-package Nodes;
+package nodes;
 
-import Models.Book;
+import models.Book;
 
 public class NodeBook {
 	

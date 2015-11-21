@@ -1,6 +1,6 @@
-package Nodes;
+package nodes;
 
-import Models.User;
+import models.User;
 
 public class NodeUser {
 	

@@ -1,7 +1,7 @@
 package controll;
 
-import Nodes.NodeBook;
-import Nodes.NodeUser;
+import nodes.NodeBook;
+import nodes.NodeUser;
 
 public class Front {
 	

@@ -1,4 +1,4 @@
-package Arbor;
+package arbor;
 
 public class ArvoreUser {
 

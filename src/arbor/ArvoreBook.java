@@ -1,7 +1,7 @@
-package Arbor;
+package arbor;
 
-import Models.Book;
-import Nodes.NodeBook;
+import models.Book;
+import nodes.NodeBook;
 
 public class ArvoreBook {
 	
@@ -153,7 +153,7 @@ public class ArvoreBook {
 	
 	
 	
-	//-----------------  FAZER CONSIDERAÇÕES ---------------------------//
+	//-----------------------------------------------------------------//
 	
 	public void Transplant(ArvoreBook T, NodeBook nodeA, NodeBook nodeB){
 		if(nodeA.getNoPai() == T.None){
@@ -213,19 +213,17 @@ public class ArvoreBook {
 	
 	
 	
+	//------------------------ METODO DE EXCLUSÃO -----------------------//
 	
-	
-	public static void RBDelete(NodeBook z){
+	public void RBDelete(ArvoreBook T, NodeBook z){
 		
-		NodeBook y,x = None;
-		if(isNone(z.getNoEsquerdo()) || isNone(z.getNoDireito())){
-			y = z;
-		}else{
-			y = TreeSucessor(z);
-		}
-		if(!isNone(y.getNoEsquerdo())){
-			x = y.getNoEsquerdo();
-		}else{
+		NodeBook y,x = T.None;
+		y = z;
+		String corY = y.getCor();
+		if(z.getNoEsquerdo() == T.None){
+			x = z.getNoDireito();
+			this.Transplant(T, z, z.getNoDireito());
+		}else if(){
 			x = y.getNoDireito();
 		}
 		x.setNoPai(y.getNoPai());
