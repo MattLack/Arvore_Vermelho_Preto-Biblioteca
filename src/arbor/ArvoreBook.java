@@ -206,9 +206,9 @@ public class ArvoreBook {
 			this.RBDelete(T, nodeBusca);
 		}
 		if(nodeAtual.getLivro().getPreco() < nodeBusca.getLivro().getPreco()){
-			TreeSearch(T,nodeAtual.getNoEsquerdo(), nodeBusca);
+			TreeSearchRemove(T,nodeAtual.getNoEsquerdo(), nodeBusca);
 		}else{
-			TreeSearch(T,nodeAtual.getNoDireito(), nodeBusca);
+			TreeSearchRemove(T,nodeAtual.getNoDireito(), nodeBusca);
 		}
 		
 	}
@@ -360,7 +360,7 @@ public class ArvoreBook {
 		
 		arvore.RBInsert(arvore,noTeste8);
 		
-		arvore.RBDelete(arvore, noTeste1);
+		//arvore.RBDelete(arvore, noTeste1);
 		
 		
 		System.out.println("noteste1");
