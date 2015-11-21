@@ -11,8 +11,8 @@ public class NodeBook {
 	private Book livro;
 	private String preto = "PRETO";
 
-	public NodeBook(Book book){
-		this();
+	public NodeBook(String cor, Book book){
+		this.cor = cor;
 		this.livro = book;
 	}
 

@@ -5,30 +5,32 @@ import Nodes.NodeBook;
 
 public class ArvoreBook {
 	
-	private static String vermelho = "VERMELHO";
-	private static String preto = "PRETO";
-	private static NodeBook None = new NodeBook();
-	private static NodeBook raiz = None;
+	private String vermelho = "VERMELHO";
+	private String preto = "PRETO";
+	private NodeBook None;
+	private NodeBook raiz;
+	
+	
+	//------------- CONSTRUTOR DA ÁRVORE ---------------//
 	
 	public ArvoreBook() {
-		raiz.setNoDireito(None);
-		raiz.setNoEsquerdo(None);
-		raiz.setNoPai(None);
+		this.None = new NodeBook(preto,null);
+		this.None.setNoDireito(None);
+		this.None.setNoDireito(None);
+		this.None.setNoPai(None);
+		this.raiz = this.None;
 	}
 	
-	public static boolean isNone(NodeBook no){
-		return no == None;
-	}
+	//--------------------------------------------------//	
 	
 	
+	//-------------------- MÉTODO DE INSERÇÃO -------------------------//
 	
-	
-	
-	public static void RBInsert(NodeBook z){
+	public void RBInsert(ArvoreBook T, NodeBook z){
 		
-		NodeBook y = None;
-		NodeBook x = raiz;
-		while(!isNone(x)){
+		NodeBook y = T.None;
+		NodeBook x = T.raiz;
+		while(x != T.None){
 			y = x;
 			if(z.getLivro().getPreco() < x.getLivro().getPreco()){
 				x = x.getNoEsquerdo(); 
@@ -37,31 +39,38 @@ public class ArvoreBook {
 			}
 		}
 		z.setNoPai(y);
-		if(isNone(y)){
-			raiz = z;
+		if(y.equals(T.None)){
+			T.raiz = z;
+			T.raiz.setNoDireito(T.None);
+			T.raiz.setNoEsquerdo(T.None);
+			T.raiz.setNoPai(T.None);
 		}else if(z.getLivro().getPreco() < y.getLivro().getPreco()){
 			y.setNoEsquerdo(z);
 		}else{
 			y.setNoDireito(z);
 		}
-		z.setNoEsquerdo(None);
-		z.setNoDireito(None);
+		z.setNoEsquerdo(T.None);
+		z.setNoDireito(T.None);
 		z.setCor(vermelho);
-		RBInsertFixup(z);
+		this.RBInsertFixup(T,z);
 		
 	}
 	
+	//---------------------------------------------------------------//
 	
 	
-	private static void RBInsertFixup(NodeBook z){
+	
+	// --------------- MÉTODO DE BALANCEAMENTO EM INSERÇÃO ----------------//
+	
+	private void RBInsertFixup(ArvoreBook T, NodeBook z){
 		
-		NodeBook y = None;
-		while(z.getNoPai().getCor() == vermelho){
+		NodeBook y = T.None;
+		while(z.getNoPai().getCor().equals(vermelho)){
 
 			if(z.getNoPai() == z.getNoPai().getNoPai().getNoEsquerdo()){
-				y = z.getNoPai().getNoPai().getNoDireito();
+				y = z.getNoPai().getNoPai().getNoEsquerdo(); // <--- Possível bug no pseudocódigo
 				
-				if(y.getCor() == vermelho){
+				if(y.getCor().equals(vermelho)){
 					z.getNoPai().setCor(preto);
 					y.setCor(preto);
 					z.getNoPai().getNoPai().setCor(vermelho);
@@ -69,17 +78,15 @@ public class ArvoreBook {
 				}
 				else if(z == z.getNoPai().getNoDireito()){
 						z = z.getNoPai();
-						leftRotate(z); 
-					}
-				
-					z.getNoPai().setCor(preto);
-					z.getNoPai().getNoPai().setCor(vermelho);
-					rightRotate(z.getNoPai().getNoPai());
-					
+						this.leftRotate(T,z); 				
+						z.getNoPai().setCor(preto);
+						z.getNoPai().getNoPai().setCor(vermelho);
+						this.rightRotate(T,z.getNoPai().getNoPai());
+					}		
 			}else{
-				y = z.getNoPai().getNoPai().getNoEsquerdo();
+				y = z.getNoPai().getNoPai().getNoDireito(); // <-- Erro no pseudocódigo 
 				
-				if(y.getCor() == vermelho){
+				if(y.getCor().equals(vermelho)){
 					z.getNoPai().setCor(preto);
 					y.setCor(preto);
 					z.getNoPai().getNoPai().setCor(vermelho);
@@ -87,29 +94,29 @@ public class ArvoreBook {
 				}
 				else if(z == z.getNoPai().getNoEsquerdo()){
 						z = z.getNoPai();	
-						rightRotate(z); 
-					}
-				
-					z.getNoPai().setCor(preto);
-					z.getNoPai().getNoPai().setCor(vermelho);
-					leftRotate(z.getNoPai().getNoPai());
-					
-				
+						this.leftRotate(T,z); 				
+						z.getNoPai().setCor(preto);
+						z.getNoPai().getNoPai().setCor(vermelho);
+						this.rightRotate(T,z.getNoPai().getNoPai());
+				}
 			}
 		}
-		raiz.setCor(preto);
+		T.raiz.setCor(preto);
 	}
+
+	//--------------------------------------------------------------------//
 	
 	
+	//---------------------- ROTAÇÃO A ESQUERDA ------------------------//
 	
-	public static void leftRotate(NodeBook x){
+	public void leftRotate(ArvoreBook T,NodeBook x){
 		
 		NodeBook y = x.getNoDireito();
 		x.setNoDireito(y.getNoEsquerdo());		
 		y.getNoEsquerdo().setNoPai(x);
 		y.setNoPai(x.getNoPai());
-		if(isNone(x.getNoPai())){
-			raiz = y;
+		if(x.getNoPai() == null){
+			T.raiz = y;
 		}else if(x == x.getNoPai().getNoEsquerdo()){
 			x.getNoPai().setNoEsquerdo(y);
 		}else{
@@ -119,17 +126,20 @@ public class ArvoreBook {
 		x.setNoPai(y);
 	}
 	
+	//------------------------------------------------------------------//
 	
 	
 	
-	public static void rightRotate(NodeBook x){
+	//----------------------- ROTAÇÃO A DIREITA -----------------------//
+	
+	public void rightRotate(ArvoreBook T, NodeBook x){
 		
 		NodeBook y = x.getNoEsquerdo();
 		x.setNoEsquerdo(y.getNoDireito());         
 		y.getNoDireito().setNoPai(x);
 		y.setNoPai(x.getNoPai());
-		if(isNone(x.getNoPai())){
-			raiz = y;
+		if(x.getNoPai() == null){
+			T.raiz = y;
 		}else if(x == x.getNoPai().getNoDireito()){
 			x.getNoPai().setNoDireito(y);
 		}else{
@@ -138,6 +148,39 @@ public class ArvoreBook {
 		y.setNoDireito(x);
 		x.setNoPai(y);
 	}
+	
+	//-----------------------------------------------------------------//
+	
+	
+	
+	//-----------------  FAZER CONSIDERAÇÕES ---------------------------//
+	
+	public void Transplant(ArvoreBook T, NodeBook nodeA, NodeBook nodeB){
+		if(nodeA.getNoPai() == T.None){
+			T.raiz = nodeB;
+		}else if(nodeA == nodeA.getNoPai().getNoEsquerdo()){
+			nodeA.getNoPai().setNoEsquerdo(nodeB);
+		}else{
+			nodeA.getNoPai().setNoDireito(nodeB);
+			nodeB.setNoPai(nodeA.getNoPai());
+		}
+	}
+	
+	// ----------------------------------------------------------------//
+	
+	
+	//---------------- MENOR ELEMENTO DA ARVORE ----------//
+	
+	public NodeBook TreeMinimum(NodeBook node){
+		NodeBook none = new NodeBook(preto, null);
+		while(node.getNoEsquerdo() != none){
+			node = node.getNoEsquerdo();
+		}
+		return node;
+	}
+	
+	//---------------------------------------------------//
+	
 	
 	
 	
