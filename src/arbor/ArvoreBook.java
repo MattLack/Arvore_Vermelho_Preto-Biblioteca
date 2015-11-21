@@ -171,9 +171,9 @@ public class ArvoreBook {
 	
 	//---------------- MENOR ELEMENTO DA ARVORE ----------//
 	
-	public NodeBook TreeMinimum(NodeBook node){
-		NodeBook none = new NodeBook(preto, null);
-		while(node.getNoEsquerdo() != none){
+	public NodeBook TreeMinimum(ArvoreBook T,NodeBook node){
+		
+		while(node.getNoEsquerdo() != T.None){
 			node = node.getNoEsquerdo();
 		}
 		return node;
@@ -184,18 +184,34 @@ public class ArvoreBook {
 	
 	
 	
-	public static NodeBook TreeSearch(NodeBook nodeAtual, NodeBook nodeBusca){
+	public NodeBook TreeSearch(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
 		
-		if(isNone(nodeAtual) || nodeAtual.getLivro().getPreco() == nodeBusca.getLivro().getPreco()){
+		if(nodeAtual.equals(T.None) || nodeAtual.getLivro().getPreco() == nodeBusca.getLivro().getPreco()){
 			return nodeAtual;
 		}
 		if(nodeAtual.getLivro().getPreco() < nodeBusca.getLivro().getPreco()){
-			return TreeSearch(nodeAtual.getNoEsquerdo(), nodeBusca);
+			return TreeSearch(T,nodeAtual.getNoEsquerdo(), nodeBusca);
 		}else{
-			return TreeSearch(nodeAtual.getNoDireito(), nodeBusca);
+			return TreeSearch(T,nodeAtual.getNoDireito(), nodeBusca);
 		}
-	}	
+	}
 	
+	
+	
+	public void TreeSearchRemove(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
+		
+		if(this.TreeSearch(T, nodeAtual, nodeBusca).equals(T.None)){
+			System.out.println("Nó não existe");
+		}else{
+			this.RBDelete(T, nodeBusca);
+		}
+		if(nodeAtual.getLivro().getPreco() < nodeBusca.getLivro().getPreco()){
+			TreeSearch(T,nodeAtual.getNoEsquerdo(), nodeBusca);
+		}else{
+			TreeSearch(T,nodeAtual.getNoDireito(), nodeBusca);
+		}
+		
+	}
 	
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
@@ -212,7 +228,7 @@ public class ArvoreBook {
 			x = z.getNoEsquerdo();
 			this.Transplant(T, z, z.getNoEsquerdo());
 		}else{
-			y = this.TreeMinimum(z.getNoDireito());
+			y = this.TreeMinimum(T,z.getNoDireito());
 			corY = y.getCor();
 			x = y.getNoDireito();
 			if(y.getNoPai().equals(z)){
@@ -293,67 +309,76 @@ public class ArvoreBook {
 	
 	
 	public static void main(String[] args) {
-				
-		Book test1 = new Book("aaa", "xxx", 11);
-		NodeBook noTeste1 = new NodeBook(test1);
 		
-		RBInsert(noTeste1);
+		ArvoreBook arvore = new ArvoreBook();
+		
+		Book test1 = new Book("aaa", "xxx", 11);
+		NodeBook noTeste1 = new NodeBook();
+		noTeste1.setLivro(test1);
+		
+		arvore.RBInsert(arvore, noTeste1);
 		
 		Book test2 = new Book("bbb", "xxx", 2);
-		NodeBook noTeste2 = new NodeBook(test2);
+		NodeBook noTeste2 = new NodeBook();
+		noTeste2.setLivro(test2);
 		
-		RBInsert(noTeste2);
+		arvore.RBInsert(arvore,noTeste2);
 		
-		/*Book test3 = new Book("ccc", "xxx", 1);
-		NodeBook noTeste3= new NodeBook(test3);
+		Book test3 = new Book("ccc", "xxx", 1);
+		NodeBook noTeste3= new NodeBook();
+		noTeste3.setLivro(test3);
 		
-		RBInsert(noTeste3);*/
+		arvore.RBInsert(arvore,noTeste3);
 		
-		/*Book test4 = new Book("ddd", "xxx", 7);
-		NodeBook noTeste4= new NodeBook(test4);
+		Book test4 = new Book("ddd", "xxx", 7);
+		NodeBook noTeste4= new NodeBook();
+		noTeste4.setLivro(test4);
 		
-		RBInsert(noTeste4);
+		arvore.RBInsert(arvore,noTeste4);
 		
 		Book test5 = new Book("eee", "xxx", 5);
-		NodeBook noTeste5= new NodeBook(test5);
+		NodeBook noTeste5= new NodeBook();
+		noTeste5.setLivro(test5);
 		
-		RBInsert(noTeste5);*/
+		arvore.RBInsert(arvore,noTeste5);
 		
-		/*Book test6 = new Book("aaa", "xxx", 8);
-		NodeBook noTeste6 = new NodeBook(test6);
+		Book test6 = new Book("aaa", "xxx", 8);
+		NodeBook noTeste6 = new NodeBook();
+		noTeste6.setLivro(test6);
 		
-		RBInsert(noTeste6);
+		arvore.RBInsert(arvore,noTeste6);
 		
 		Book test7 = new Book("aaa", "xxx", 14);
-		NodeBook noTeste7 = new NodeBook(test7);
+		NodeBook noTeste7 = new NodeBook();
+		noTeste7.setLivro(test7);
 		
-		RBInsert(noTeste7);
+		arvore.RBInsert(arvore,noTeste7);
 		
 		Book test8 = new Book("aaa", "xxx", 15);
-		NodeBook noTeste8 = new NodeBook(test8);
+		NodeBook noTeste8 = new NodeBook();
+		noTeste8.setLivro(test8);
 		
-		RBInsert(noTeste8);*/
+		arvore.RBInsert(arvore,noTeste8);
+		
+		arvore.RBDelete(arvore, noTeste1);
 		
 		
-		
-		System.out.println("raiz");
-		System.out.println(raiz);
 		System.out.println("noteste1");
-		System.out.println(noTeste1);
+		System.out.println(noTeste1);		
 		System.out.println("noteste2");
 		System.out.println(noTeste2);
-		/*System.out.println("noteste3");
-		System.out.println(noTeste3);*/
-		/*System.out.println("noteste4");
+		System.out.println("noteste3");
+		System.out.println(noTeste3);
+		System.out.println("noteste4");
 		System.out.println(noTeste4);
 		System.out.println("noteste5");
-		System.out.println(noTeste5);*/
-		/*System.out.println("noteste6");
+		System.out.println(noTeste5);
+		System.out.println("noteste6");
 		System.out.println(noTeste6);
 		System.out.println("noteste7");
 		System.out.println(noTeste7);
 		System.out.println("noteste8");
-		System.out.println(noTeste8);*/
+		System.out.println(noTeste8);
 		
 		
 		

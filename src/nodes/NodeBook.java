@@ -9,7 +9,6 @@ public class NodeBook {
 	private NodeBook NoDireito;
 	private NodeBook NoPai;
 	private Book livro;
-	private String preto = "PRETO";
 
 	public NodeBook(String cor, Book book){
 		this.cor = cor;
@@ -17,11 +16,6 @@ public class NodeBook {
 	}
 
 	public NodeBook() {
-		this.cor = preto;
-		this.setLivro(null);
-		this.setNoPai(null);
-		this.setNoDireito(null);
-		this.setNoEsquerdo(null);
 	}
 
 
@@ -71,7 +65,6 @@ public class NodeBook {
 	public void setLivro(Book livro) {
 		this.livro = livro;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
