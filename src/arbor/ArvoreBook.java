@@ -10,6 +10,23 @@ public class ArvoreBook {
 	private NodeBook None;
 	private NodeBook raiz;
 	
+	//------------- Metodo que retorna a raiz-----------//
+	
+	public NodeBook getRaiz(ArvoreBook n){
+		return n.raiz;
+	}
+	
+	//--------------------------------------------------//
+	
+	
+	//------------- Metodo que retorna o None-----------//
+	
+	public NodeBook getNone(ArvoreBook n){
+		return n.None;
+	}
+		
+	//--------------------------------------------------//
+	
 	
 	//------------- CONSTRUTOR DA ÁRVORE ---------------//
 	
@@ -186,7 +203,7 @@ public class ArvoreBook {
 	
 	public NodeBook TreeSearch(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
 		
-		if(nodeAtual.equals(T.None) || nodeAtual.getLivro().getPreco() == nodeBusca.getLivro().getPreco()){
+		if(nodeAtual.equals(T.None) || nodeAtual.getLivro() == nodeBusca.getLivro()){
 			return nodeAtual;
 		}
 		if(nodeAtual.getLivro().getPreco() < nodeBusca.getLivro().getPreco()){
