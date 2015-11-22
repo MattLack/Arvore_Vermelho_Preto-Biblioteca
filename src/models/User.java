@@ -10,6 +10,8 @@ public class User {
 	public User(String name, int id) {
 		this.name = name;
 		this.id = id;
+		this.limitedLoan = false;
+		this.bookLoan = null;
 	}
 
 	public String getName() {
@@ -65,7 +67,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", id=" + id + ", limitedLoan=" + limitedLoan + ", bookLoan=" + bookLoan.getTitle() + "]";
+		return "User [name=" + name + ", id=" + id + ", limitedLoan=" + limitedLoan + "]";
 	}	
 	
 

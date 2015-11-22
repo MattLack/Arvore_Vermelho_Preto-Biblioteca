@@ -7,25 +7,8 @@ public class ArvoreBook {
 	
 	private String vermelho = "VERMELHO";
 	private String preto = "PRETO";
-	private NodeBook None;
-	private NodeBook raiz;
-	
-	//------------- Metodo que retorna a raiz-----------//
-	
-	public NodeBook getRaiz(ArvoreBook n){
-		return n.raiz;
-	}
-	
-	//--------------------------------------------------//
-	
-	
-	//------------- Metodo que retorna o None-----------//
-	
-	public NodeBook getNone(ArvoreBook n){
-		return n.None;
-	}
-		
-	//--------------------------------------------------//
+	public NodeBook None;
+	public NodeBook raiz;
 	
 	
 	//------------- CONSTRUTOR DA ÁRVORE ---------------//
@@ -200,34 +183,72 @@ public class ArvoreBook {
 	
 	
 	
-	
-	public NodeBook TreeSearch(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
+	public boolean TreeSearchExistNode(ArvoreBook T, NodeBook livro){
 		
-		if(nodeAtual.equals(T.None) || nodeAtual.getLivro() == nodeBusca.getLivro()){
-			return nodeAtual;
+		NodeBook y = T.None;		
+		NodeBook x = T.raiz;
+	
+		while(x != T.None){
+			y = x;
+			if(livro.getLivro().getPreco() < x.getLivro().getPreco()){
+				x = x.getNoEsquerdo();
+				if((x != T.None)){
+					if(x.getLivro().equals(livro.getLivro())){
+						return true;
+					}
+				}
+			}else{
+				x = x.getNoDireito();
+				if((x != T.None)){
+					if(x.getLivro().equals(livro.getLivro())){
+						return true;
+					}
+				}
+			}
 		}
-		if(nodeAtual.getLivro().getPreco() < nodeBusca.getLivro().getPreco()){
-			return TreeSearch(T,nodeAtual.getNoEsquerdo(), nodeBusca);
-		}else{
-			return TreeSearch(T,nodeAtual.getNoDireito(), nodeBusca);
+		return false;
+	}
+
+
+	public NodeBook TreeSearch(ArvoreBook T, NodeBook book){
+	
+		if(this.TreeSearchExistNode(T, book)){
+			NodeBook y = T.None;		
+			NodeBook x = T.raiz;
+			while(x != T.None){
+				y = x;
+				if(book.getLivro().getPreco() < x.getLivro().getPreco()){
+					x = x.getNoEsquerdo();
+					if(x.getLivro().equals(book.getLivro())){
+						return  x;
+					}
+				}else{
+					x = x.getNoDireito();
+					if(x.getLivro().equals(book.getLivro())){
+						return x;
+					}
+				}
+			}
 		}
+
+		return T.None;
 	}
 	
 	
 	
-	public boolean TreeSearchRemove(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
+	public boolean TreeSearchRemove(ArvoreBook T, NodeBook book){
 		
-		NodeBook aux = this.TreeSearch(T, nodeAtual, nodeBusca);
+		NodeBook nodeBusca = this.TreeSearch(T, book);
 		
-		if(aux.equals(T.None)){
+		if(nodeBusca.equals(T.None)){
 			return false;
 		}else{
-			this.RBDelete(T, aux);
+			this.RBDelete(T, nodeBusca);
 			return true;
 		}
 		
-		
 	}
+	
 	
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
@@ -376,7 +397,8 @@ public class ArvoreBook {
 		
 		arvore.RBInsert(arvore,noTeste8);
 		
-		arvore.RBDelete(arvore, noTeste8);
+		//arvore.RBDelete(arvore, noTeste8);
+
 		
 		
 		System.out.println("noteste1");

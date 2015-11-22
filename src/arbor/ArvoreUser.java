@@ -7,25 +7,8 @@ public class ArvoreUser {
 	
 	private String vermelho = "VERMELHO";
 	private String preto = "PRETO";
-	private NodeUser None;
-	private NodeUser raiz;
-	
-	//------------- Metodo que retorna a raiz-----------//
-	
-	public NodeUser getRaiz(ArvoreUser n){
-		return n.raiz;
-	}
-	
-	//--------------------------------------------------//
-	
-	
-	//------------- Metodo que retorna o None-----------//
-	
-	public NodeUser getNone(ArvoreUser n){
-		return n.None;
-	}
-		
-	//--------------------------------------------------//
+	public NodeUser None;
+	public NodeUser raiz;
 	
 	
 	//------------- CONSTRUTOR DA ÁRVORE ---------------//
@@ -201,32 +184,72 @@ public class ArvoreUser {
 	
 	
 	
-	public NodeUser TreeSearch(ArvoreUser T, NodeUser nodeAtual, NodeUser nodeBusca){
+	public boolean TreeSearchExistNode(ArvoreUser T, NodeUser user){
 		
-		if(nodeAtual.equals(T.None) || nodeAtual.getUsuario() == nodeBusca.getUsuario()){
-			return nodeAtual;
+		NodeUser y = T.None;		
+		NodeUser x = T.raiz;
+	
+		while(x != T.None){
+			y = x;
+			if(user.getUsuario().getId() < x.getUsuario().getId()){
+				x = x.getNoEsquerdo();
+				if((x != T.None)){
+					if(x.getUsuario().equals(user.getUsuario())){
+						return true;
+					}
+				}
+			}else{
+				x = x.getNoDireito();
+				if((x != T.None)){
+					if(x.getUsuario().equals(user.getUsuario())){
+						return true;
+					}
+				}
+			}
 		}
-		if(nodeAtual.getUsuario().getId() < nodeBusca.getUsuario().getId()){
-			return TreeSearch(T,nodeAtual.getNoEsquerdo(), nodeBusca);
-		}else{
-			return TreeSearch(T,nodeAtual.getNoDireito(), nodeBusca);
+		return false;
+	}
+
+
+	public NodeUser TreeSearch(ArvoreUser T, NodeUser user){
+	
+		if(this.TreeSearchExistNode(T, user)){
+			NodeUser y = T.None;		
+			NodeUser x = T.raiz;
+			while(x != T.None){
+				y = x;
+				if(user.getUsuario().getId() < x.getUsuario().getId()){
+					x = x.getNoEsquerdo();
+					if(x.getUsuario().equals(user.getUsuario())){
+						return  x;
+					}
+				}else{
+					x = x.getNoDireito();
+					if(x.getUsuario().equals(user.getUsuario())){
+						return x;
+					}
+				}
+			}
 		}
+
+		return T.None;
 	}
 	
 	
 	
-	public boolean TreeSearchRemove(ArvoreUser T, NodeUser nodeAtual, NodeUser nodeBusca){
+	public boolean TreeSearchRemove(ArvoreUser T, NodeUser user){
 		
-		NodeUser aux = this.TreeSearch(T, nodeAtual, nodeBusca);
+		NodeUser nodeBusca = this.TreeSearch(T, user);
 		
-		if(aux.equals(T.None)){
+		if(nodeBusca.equals(T.None)){
 			return false;
 		}else{
-			this.RBDelete(T, aux);
+			this.RBDelete(T, nodeBusca);
 			return true;
 		}
 		
 	}
+	
 	
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
@@ -362,6 +385,7 @@ public class ArvoreUser {
 		
 		arbo.RBInsert(arbo, node6);
 		
+		//System.out.println(arbo.TreeSearch(arbo, arbo.getRaiz(arbo), node2));
 		
 		System.out.println("node1");
 		System.out.println(node1);

@@ -13,6 +13,8 @@ public class Book {
         this.title = title;
         this.author = author;
         this.preco = preco;
+        this.loan = false;
+        this.userLoan = null;
     }
 
 
@@ -92,8 +94,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", loan=" + loan + ", preco=" + preco + ", userLoan="
-				+ userLoan.getName() + "]";
+		return "Book [title=" + title + ", author=" + author + ", loan=" + loan + ", preco=" + preco + "]";
 	}
 
 }
