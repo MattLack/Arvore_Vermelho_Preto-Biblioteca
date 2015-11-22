@@ -215,18 +215,17 @@ public class ArvoreBook {
 	
 	
 	
-	public void TreeSearchRemove(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
+	public boolean TreeSearchRemove(ArvoreBook T, NodeBook nodeAtual, NodeBook nodeBusca){
 		
-		if(this.TreeSearch(T, nodeAtual, nodeBusca).equals(T.None)){
-			System.out.println("Nó não existe");
+		NodeBook aux = this.TreeSearch(T, nodeAtual, nodeBusca);
+		
+		if(aux.equals(T.None)){
+			return false;
 		}else{
-			this.RBDelete(T, nodeBusca);
+			this.RBDelete(T, aux);
+			return true;
 		}
-		if(nodeAtual.getLivro().getPreco() < nodeBusca.getLivro().getPreco()){
-			TreeSearchRemove(T,nodeAtual.getNoEsquerdo(), nodeBusca);
-		}else{
-			TreeSearchRemove(T,nodeAtual.getNoDireito(), nodeBusca);
-		}
+		
 		
 	}
 	
@@ -377,7 +376,7 @@ public class ArvoreBook {
 		
 		arvore.RBInsert(arvore,noTeste8);
 		
-		//arvore.RBDelete(arvore, noTeste1);
+		arvore.RBDelete(arvore, noTeste8);
 		
 		
 		System.out.println("noteste1");

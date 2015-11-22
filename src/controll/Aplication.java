@@ -2,12 +2,16 @@ package controll;
 
 import java.util.Scanner;
 import arbor.ArvoreBook;
+import arbor.ArvoreUser;
 import models.Book;
+import models.User;
 import nodes.NodeBook;
+import nodes.NodeUser;
 
 public class Aplication{
 	
 	NodeBook nod = new NodeBook();
+	NodeUser nodU = new NodeUser();
 	
 	public Aplication(){
 		
@@ -22,6 +26,21 @@ public class Aplication{
 		else{
 			return false;
 		}
+	}
+	
+	public boolean CadastrarUsuario(ArvoreUser arb, User user){
+		nodU.setUsuario(user);
+		if(arb.TreeSearch(arb, arb.getRaiz(arb), nodU).equals(arb.getNone(arb))){
+			arb.RBInsert(arb, nodU);
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean RemoverLivro(ArvoreBook T, Book book){
+		
 	}
 	
 	public void menu(){
@@ -42,6 +61,8 @@ public class Aplication{
 		Aplication apl = new Aplication();
 		
 		ArvoreBook arvore = new ArvoreBook();
+		ArvoreUser arvoreU = new ArvoreUser();
+		
 		Scanner teclado = new Scanner(System.in);
 		
 		int n = 1;
@@ -70,13 +91,23 @@ public class Aplication{
 				if(apl.CadastroLivro(arvore, livro))
 					System.out.println("\nLivro cadastrado com sucesso\n");
 				else
-					System.out.println("\nLivro já existe\n");
+					System.out.println("\nLivro ja existe\n");
 				teclado.nextLine();
 
 				break;
 
 			case 2:
+				System.out.println("Digite o nome do usuario:");
+				String nome = teclado.nextLine();
+				System.out.println("Digite a identidade do usuario:");
+				int id = teclado.nextInt();
+				User usuario = new User(nome, id);
+				if(apl.CadastrarUsuario(arvoreU, usuario))
+					System.out.println("\nUsuario cadastrado com sucesso\n");
+				else
+					System.out.println("\nUsuario ja existe");
 				teclado.nextLine();
+				
 				break;
 				
 			case 3:

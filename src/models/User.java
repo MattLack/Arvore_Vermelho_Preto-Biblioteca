@@ -3,13 +3,12 @@ package models;
 public class User {
 	
 	private String name;
-	private String id;
+	private int id;
 	private boolean limitedLoan;
 	
-	public User(String name, String id, boolean limitedLoan) {
+	public User(String name, int id) {
 		this.name = name;
 		this.id = id;
-		this.limitedLoan = limitedLoan;
 	}
 
 	public String getName() {
@@ -20,11 +19,11 @@ public class User {
 		this.name = name;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
