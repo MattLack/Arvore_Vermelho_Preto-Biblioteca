@@ -250,6 +250,26 @@ public class ArvoreBook {
 	}
 	
 	
+	public void TreePrint(ArvoreBook T, NodeBook node){
+		if(!(node.equals(T.None))){
+			System.out.println(node);
+			if(!(node.getNoEsquerdo().equals(T.None)))
+				TreePrint(T, node.getNoEsquerdo());
+			if(!(node.getNoDireito().equals(T.None)))
+				TreePrint(T,node.getNoDireito());			
+		}
+	}
+	
+	public void TreePrintBook(ArvoreBook T, NodeBook node){
+		if(!(node.equals(T.None))){
+			System.out.println(node.getLivro());
+			if(!(node.getNoEsquerdo().equals(T.None)))
+				TreePrintBook(T, node.getNoEsquerdo());
+			if(!(node.getNoDireito().equals(T.None)))
+				TreePrintBook(T,node.getNoDireito());			
+		}
+	}
+	
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
 	
@@ -400,8 +420,10 @@ public class ArvoreBook {
 		//arvore.RBDelete(arvore, noTeste8);
 
 		
+		arvore.TreePrintBook(arvore, arvore.raiz);
 		
-		System.out.println("noteste1");
+		
+		/*System.out.println("noteste1");
 		System.out.println(noTeste1);		
 		System.out.println("noteste2");
 		System.out.println(noTeste2);
@@ -416,7 +438,7 @@ public class ArvoreBook {
 		System.out.println("noteste7");
 		System.out.println(noTeste7);
 		System.out.println("noteste8");
-		System.out.println(noTeste8);
+		System.out.println(noTeste8);*/
 		
 		
 		

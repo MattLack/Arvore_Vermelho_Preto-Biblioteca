@@ -130,13 +130,16 @@ public class Aplication{
 	
 	public void menu(){
 		
-		System.out.println("1 - cadastrar livro");
-		System.out.println("2 - cadastrar usuario");
-		System.out.println("3 - emprestimo de livro");
-		System.out.println("4 - devolucao de livro");
-		System.out.println("5 - remocao livro");
-		System.out.println("6 - remocao usuario");
-		System.out.println("7 - ");
+		System.out.println(" 1 - cadastrar livro");
+		System.out.println(" 2 - cadastrar usuario");
+		System.out.println(" 3 - emprestimo de livro");
+		System.out.println(" 4 - devolucao de livro");
+		System.out.println(" 5 - remocao livro");
+		System.out.println(" 6 - remocao usuario");
+		System.out.println(" 7 - livros cadastrados");
+		System.out.println(" 8 - usuarios cadastrados");
+		System.out.println(" 9 - TreePrintable ArvoreBook");
+		System.out.println("10 - TreePrintable ArvoreUser");
 		System.out.println("0 - sair");
 	}
 	
@@ -179,11 +182,11 @@ public class Aplication{
 					System.out.println("\nLivro cadastrado com sucesso\n");
 				else
 					System.out.println("\nLivro ja existe\n");
-				NodeBook p = new NodeBook();
+				/*NodeBook p = new NodeBook();
 				p.setLivro(livro);
 				p = arvore.TreeSearch(arvore, p);
 				System.out.println(p);
-				teclado.nextLine();
+				teclado.nextLine();*/
 
 				break;
 
@@ -298,7 +301,39 @@ public class Aplication{
 				break;
 
 			case 7:
+				
+				System.out.println("");
+				arvore.TreePrintBook(arvore, arvore.raiz);
+				System.out.println("");
+				teclado.nextLine();
 
+				break;
+				
+			case 8:
+				
+				System.out.println("");
+				arvoreU.TreePrintUser(arvoreU, arvoreU.raiz);
+				System.out.println("");
+				teclado.nextLine();
+				
+				break;
+				
+			case 9:
+				
+				System.out.println("");
+				arvore.TreePrint(arvore, arvore.raiz);
+				System.out.println("");
+				teclado.nextLine();
+				
+				break;
+			
+			case 10:
+				
+				System.out.println("");
+				arvoreU.TreePrint(arvoreU, arvoreU.raiz);
+				System.out.println("");
+				teclado.nextLine();
+				
 				break;
 
 			default:

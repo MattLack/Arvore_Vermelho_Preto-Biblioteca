@@ -1,6 +1,7 @@
 package arbor;
 
 import models.User;
+import nodes.NodeBook;
 import nodes.NodeUser;
 
 public class ArvoreUser {
@@ -251,6 +252,27 @@ public class ArvoreUser {
 	}
 	
 	
+	public void TreePrint(ArvoreUser T, NodeUser node){
+		if(!(node.equals(T.None))){
+			System.out.println(node);
+			if(!(node.getNoEsquerdo().equals(T.None)))
+				TreePrint(T, node.getNoEsquerdo());
+			if(!(node.getNoDireito().equals(T.None)))
+				TreePrint(T,node.getNoDireito());			
+		}
+	}
+	
+	public void TreePrintUser(ArvoreUser T, NodeUser node){
+		if(!(node.equals(T.None))){
+			System.out.println(node.getUsuario());
+			if(!(node.getNoEsquerdo().equals(T.None)))
+				TreePrintUser(T, node.getNoEsquerdo());
+			if(!(node.getNoDireito().equals(T.None)))
+				TreePrintUser(T,node.getNoDireito());			
+		}
+	}
+	
+	
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
 	
@@ -387,7 +409,10 @@ public class ArvoreUser {
 		
 		//System.out.println(arbo.TreeSearch(arbo, arbo.getRaiz(arbo), node2));
 		
-		System.out.println("node1");
+		
+		arbo.TreePrintUser(arbo, arbo.raiz);
+		
+		/*System.out.println("node1");
 		System.out.println(node1);
 		System.out.println("node2");
 		System.out.println(node2);
@@ -398,7 +423,7 @@ public class ArvoreUser {
 		System.out.println("node5");
 		System.out.println(node5);
 		System.out.println("node6");
-		System.out.println(node6);
+		System.out.println(node6);*/
 		
 		
 		
