@@ -1,3 +1,17 @@
+
+/**
+ * 
+ * UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO
+ * DISCIPLINA: ALGORITMOS E ESTRUTURA DE DADOS
+ * CURSO DO DISCENTE: BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO
+ * CURSO DA DISCIPLINA OFERTADA: BACHARELADO EM SISTEMA DE INFORMAÇÃO
+ * EMAIL DO DISCENTE: A.MATEUSLOL@GMAIL.COM
+ * DISCENTE: ANDERSON MATEUS DA SILVA
+ * @author Matt_lackome
+ *
+ */
+
+
 package controll;
 
 import java.util.Scanner;
@@ -7,6 +21,7 @@ import models.Book;
 import models.User;
 import nodes.NodeBook;
 import nodes.NodeUser;
+
 
 public class Aplication{
 	
@@ -77,31 +92,38 @@ public class Aplication{
 	
 	//--------------- METODO PARA EFETUAR E VALIDAR O EMPRESTIMO DE LIVRO ----------------//
 	
-	public int EmprestimoLivro(ArvoreBook AB, ArvoreUser AU, Book livro, User usuario){
-		NodeBook nod = new NodeBook();
-		NodeUser nodU = new NodeUser();
-		nod.setLivro(livro);
-		nodU.setUsuario(usuario);
-		NodeBook nodoB = AB.TreeSearch(AB, nod);
-		NodeUser nodoU = AU.TreeSearch(AU, nodU);
+	
+	/*public void LoanBook(ArvoreBook AB, ArvoreUser AU, NodeBook x, NodeUser y){
+		System.out.println(AB.fazendoEmprestimo(AB, x));
+		System.out.println(AU.fazendoEmprestimo(AU, y));
+	}*/
+	
+	/*public Book EmprestimoLivro(ArvoreBook AB, ArvoreUser AU, NodeBook livro, NodeUser usuario){
+		
+	
+		livro = AB.TreeSearch(AB, livro);
+		usuario = AU.TreeSearch(AU, usuario);
+		
+		return livro.getNoPai().getLivro();
+		
 		if(nodoB.equals(AB.None) || nodoU.equals(AU.None))
 			return 1;
 		else if(nodoB.getLivro().getLoan() == false && nodoU.getUsuario().getLimitedLoan() == false){
-			nodoB.getLivro().setUserLoan(usuario);
-			nodoU.getUsuario().setBookLoan(livro);
+			nodoB.getLivro().setUserLoan(usuario.getUsuario());
+			nodoU.getUsuario().setBookLoan(livro.getLivro());
 			nodoB.getLivro().setLoan(true);
 			nodoU.getUsuario().setLimitedLoan(true);
 			return 0;
 		}else
 			return 2;
-	}
+	}*/
 	
 	//------------------------------------------------------------------------------------//
 	
 	
 	//------------------ METODO PARA EFETUAR E VALIDAR A DEVOLUCAO DE UM LIVRO ---------------------//
 	
-	public int DevolucaoLivro(ArvoreBook AB, ArvoreUser AU, Book livro, User usuario){
+	/*public int DevolucaoLivro(ArvoreBook AB, ArvoreUser AU, Book livro, User usuario){
 		NodeBook nod = new NodeBook();
 		NodeUser nodU = new NodeUser();
 		nod.setLivro(livro);
@@ -121,7 +143,7 @@ public class Aplication{
 					return 2;
 		}else
 			return 3;
-	}
+	}*/
 	
 	//------------------------------------------------------------------------------------------------//
 	
@@ -162,15 +184,17 @@ public class Aplication{
 			apl.menu();
 			int op = teclado.nextInt();
 			teclado.nextLine();
+			
 
 			switch(op){
 			
 			case 0:
 				n = 0;
-				teclado.nextLine();
+				
 				break;
 				
 			case 1:
+				
 				System.out.println("Digite o titulo do livro:");
 				String titulo = teclado.nextLine();
 				System.out.println("Digite o autor do livro:");
@@ -182,11 +206,6 @@ public class Aplication{
 					System.out.println("\nLivro cadastrado com sucesso\n");
 				else
 					System.out.println("\nLivro ja existe\n");
-				/*NodeBook p = new NodeBook();
-				p.setLivro(livro);
-				p = arvore.TreeSearch(arvore, p);
-				System.out.println(p);
-				teclado.nextLine();*/
 
 				break;
 
@@ -196,16 +215,21 @@ public class Aplication{
 				System.out.println("Digite a identidade do usuario:");
 				int id = teclado.nextInt();
 				User usuario = new User(nome, id);
+				
+				NodeUser teste = new NodeUser();
+				teste.setUsuario(usuario);
+				
 				if(apl.CadastrarUsuario(arvoreU, usuario))
 					System.out.println("\nUsuario cadastrado com sucesso\n");
 				else
 					System.out.println("\nUsuario ja existe");
 				teclado.nextLine();
 				
+				
 				break;
 				
 			case 3:
-				System.out.println("Digite o titulo do livro a ser emprestado:");
+				/*System.out.println("Digite o titulo do livro a ser emprestado:");
 				String tituloE = teclado.nextLine();
 				System.out.println("Digite o autor do livro a ser emprestado:");
 				String autorE = teclado.nextLine();
@@ -222,28 +246,24 @@ public class Aplication{
 				NodeBook nod = new NodeBook();
 				NodeUser nodU = new NodeUser();
 				nod.setLivro(livroE);
-				nodU.setUsuario(usuarioE);
+				nodU.setUsuario(usuarioE);				
 				
-				System.out.println(nod);
-				System.out.println(nodU);
+				apl.LoanBook(arvore, arvoreU, nod, nodU);
 				
-				NodeBook nodoB = arvore.TreeSearch(arvore, nod);
-				NodeUser nodoU = arvoreU.TreeSearch(arvoreU, nodU);
+				//System.out.println(apl.EmprestimoLivro(arvore, arvoreU, nod, nodU));
 				
-				
-				
-				/*if(apl.EmprestimoLivro(arvore, arvoreU, livroE, usuarioE) == 0)
+				if(apl.EmprestimoLivro(arvore, arvoreU, nod, nodU) == 0)
 					System.out.println("\nEmprestimo feito com sucesso\n");
-				else if(apl.EmprestimoLivro(arvore, arvoreU, livroE, usuarioE) == 1)
+				else if(apl.EmprestimoLivro(arvore, arvoreU, nod, nodU) == 1)
 					System.out.println("\nErro dados nulos\n");
-				else if(apl.EmprestimoLivro(arvore, arvoreU, livroE, usuarioE) == 2)
-					System.out.println("\nErro Usuario no limite ou Livro ja emprestado\n");
+				else if(apl.EmprestimoLivro(arvore, arvoreU, nod, nodU) == 2)
+					System.out.println("\nErro Usuario no limite ou Livro ja emprestado\n");*/
 				teclado.nextLine();
-*/
+
 				break;
 
 			case 4:
-				System.out.println("Digite o titulo do livro a ser devolvido:");
+				/*System.out.println("Digite o titulo do livro a ser devolvido:");
 				String tituloD = teclado.nextLine();
 				System.out.println("Digite o autor do livro a ser devolvido:");
 				String autorD = teclado.nextLine();
@@ -263,7 +283,7 @@ public class Aplication{
 				else if(apl.DevolucaoLivro(arvore, arvoreU, livroD, usuarioD) == 2)
 					System.out.println("\nErro dados de usuario e livro não equivalentes\n");
 				else if(apl.DevolucaoLivro(arvore, arvoreU, livroD, usuarioD) == 3)
-					System.out.println("\nErro dados não equivalentes\n");
+					System.out.println("\nErro dados não equivalentes\n");*/
 				teclado.nextLine();
 
 				break;
@@ -278,9 +298,9 @@ public class Aplication{
 				double precoRemover = teclado.nextDouble();
 				Book livroRemover = new Book(tituloRemover, autorRemover, precoRemover);
 				if(apl.RemoverLivro(arvore, livroRemover))
-					System.out.println("Livro removido com sucesso");
+					System.out.println("\nLivro removido com sucesso\n");
 				else
-					System.out.println("Livro nao encontrado");
+					System.out.println("\nLivro nao encontrado\n");
 				teclado.nextLine();
 				
 				break;
@@ -293,9 +313,9 @@ public class Aplication{
 				int idRemover = teclado.nextInt();
 				User usuarioRemover = new User(nomeRemover, idRemover);
 				if(apl.RemoverUsuario(arvoreU, usuarioRemover))
-					System.out.println("Usuario removido com sucesso");
+					System.out.println("\nUsuario removido com sucesso\n");
 				else
-					System.out.println("Usuario nao encontrado");
+					System.out.println("\nUsuario nao encontrado\n");
 				teclado.nextLine();
 
 				break;
@@ -305,7 +325,7 @@ public class Aplication{
 				System.out.println("");
 				arvore.TreePrintBook(arvore, arvore.raiz);
 				System.out.println("");
-				teclado.nextLine();
+				
 
 				break;
 				
@@ -314,7 +334,7 @@ public class Aplication{
 				System.out.println("");
 				arvoreU.TreePrintUser(arvoreU, arvoreU.raiz);
 				System.out.println("");
-				teclado.nextLine();
+				
 				
 				break;
 				
@@ -323,7 +343,7 @@ public class Aplication{
 				System.out.println("");
 				arvore.TreePrint(arvore, arvore.raiz);
 				System.out.println("");
-				teclado.nextLine();
+				
 				
 				break;
 			
@@ -332,7 +352,7 @@ public class Aplication{
 				System.out.println("");
 				arvoreU.TreePrint(arvoreU, arvoreU.raiz);
 				System.out.println("");
-				teclado.nextLine();
+				
 				
 				break;
 

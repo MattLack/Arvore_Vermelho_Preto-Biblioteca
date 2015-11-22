@@ -1,3 +1,16 @@
+
+/**
+ * 
+ * UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO
+ * DISCIPLINA: ALGORITMOS E ESTRUTURA DE DADOS
+ * CURSO DO DISCENTE: BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO
+ * CURSO DA DISCIPLINA OFERTADA: BACHARELADO EM SISTEMA DE INFORMAÇÃO
+ * EMAIL DO DISCENTE: A.MATEUSLOL@GMAIL.COM
+ * DISCENTE: ANDERSON MATEUS DA SILVA
+ * @author Matt_lackome
+ *
+ */
+
 package arbor;
 
 import models.Book;
@@ -270,6 +283,15 @@ public class ArvoreBook {
 		}
 	}
 	
+	/*public NodeBook fazendoEmprestimo(ArvoreBook T, NodeBook x ){
+		
+		x = T.TreeSearch(T, x);
+		
+		x.getLivro().setLoan(true);
+		
+		return x;
+		
+	}*/
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
 	
@@ -368,6 +390,7 @@ public class ArvoreBook {
 	public static void main(String[] args) {
 		
 		ArvoreBook arvore = new ArvoreBook();
+		ArvoreUser arvoreU = new ArvoreUser();
 		
 		Book test1 = new Book("aaa", "xxx", 11);
 		NodeBook noTeste1 = new NodeBook();
@@ -417,11 +440,14 @@ public class ArvoreBook {
 		
 		arvore.RBInsert(arvore,noTeste8);
 		
+		User usu5 = new User("aaaa", 4);
+		NodeUser node5 = new NodeUser();
+		node5.setUsuario(usu5);
+		
 		//arvore.RBDelete(arvore, noTeste8);
 
-		
-		arvore.TreePrintBook(arvore, arvore.raiz);
-		
+		//System.out.println(arvore.TreeSearch(arvore, noTeste5));		
+	
 		
 		/*System.out.println("noteste1");
 		System.out.println(noTeste1);		

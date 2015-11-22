@@ -1,7 +1,19 @@
+
+/**
+ * 
+ * UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO
+ * DISCIPLINA: ALGORITMOS E ESTRUTURA DE DADOS
+ * CURSO DO DISCENTE: BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO
+ * CURSO DA DISCIPLINA OFERTADA: BACHARELADO EM SISTEMA DE INFORMAÇÃO
+ * EMAIL DO DISCENTE: A.MATEUSLOL@GMAIL.COM
+ * DISCENTE: ANDERSON MATEUS DA SILVA
+ * @author Matt_lackome
+ *
+ */
+
 package arbor;
 
 import models.User;
-import nodes.NodeBook;
 import nodes.NodeUser;
 
 public class ArvoreUser {
@@ -273,6 +285,17 @@ public class ArvoreUser {
 	}
 	
 	
+	/*public NodeUser fazendoEmprestimo(ArvoreUser T, NodeUser x ){
+		
+		x = T.TreeSearch(T, x);
+		
+		x.getUsuario().setLimitedLoan(true);
+		
+		return x;
+		
+	}*/
+	
+	
 	
 	//------------------------ METODO DE EXCLUSÃO -----------------------//
 	
@@ -407,10 +430,10 @@ public class ArvoreUser {
 		
 		arbo.RBInsert(arbo, node6);
 		
-		//System.out.println(arbo.TreeSearch(arbo, arbo.getRaiz(arbo), node2));
+		System.out.println(arbo.TreeSearch(arbo, node4));
 		
 		
-		arbo.TreePrintUser(arbo, arbo.raiz);
+		//arbo.TreePrintUser(arbo, arbo.raiz);
 		
 		/*System.out.println("node1");
 		System.out.println(node1);
