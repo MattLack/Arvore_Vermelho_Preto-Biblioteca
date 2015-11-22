@@ -440,9 +440,9 @@ public class ArvoreBook {
 		
 		arvore.RBInsert(arvore,noTeste8);
 		
-		User usu5 = new User("aaaa", 4);
+		/*User usu5 = new User("aaaa", 4);
 		NodeUser node5 = new NodeUser();
-		node5.setUsuario(usu5);
+		node5.setUsuario(usu5);*/
 		
 		//arvore.RBDelete(arvore, noTeste8);
 
