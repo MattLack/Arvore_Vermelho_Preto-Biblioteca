@@ -7,7 +7,7 @@ public class Book {
     private String author;
     private boolean loan;
     private double preco;
-   
+    private User userLoan;
     
     public Book(String title, String author, double preco) {
         this.title = title;
@@ -52,8 +52,17 @@ public class Book {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+		
 
-	
+	public User getUserLoan() {
+		return userLoan;
+	}
+
+
+	public void setUserLoan(User userLoan) {
+		this.userLoan = userLoan;
+	}
+
 
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,12 +90,10 @@ public class Book {
 	}
 
 
+	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", loan=" + loan + ", preco=" + preco + "]";
+		return "Book [title=" + title + ", author=" + author + ", loan=" + loan + ", preco=" + preco + ", userLoan="
+				+ userLoan.getName() + "]";
 	}
 
-
-	
-
- 
 }
